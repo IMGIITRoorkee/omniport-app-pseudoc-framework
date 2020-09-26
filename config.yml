@@ -1,0 +1,8 @@
+nomenclature:
+  name: new_pseudoc
+  verboseName: New pseudoc
+description: An app for Omniport that does what apps do
+baseUrls:
+  http: new_pseudoc/
+  static: new_pseudoc/
+isApi: true
