@@ -16,3 +16,12 @@ class App(Model):
         max_length=255,
         blank=True,
     )
+
+    def __str__(self):
+        """
+        Return the string representation of the model
+        :return: the string representation of the model
+        """
+
+        name = self.name
+        return f'{name}'
