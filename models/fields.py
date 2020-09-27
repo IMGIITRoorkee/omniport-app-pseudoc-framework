@@ -33,12 +33,30 @@ class NumericField(Model):
         return f'Numeric Field: min = {minimum}, max = {maximum}'
 
 
+class DropdownField(Model):
+    function = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    multiple_allowed = models.BooleanField(default=True)
+
+    def __str__(self):
+        """
+        Return the string representation of the model
+        :return: the string representation of the model
+        """
+
+        func = self.function
+        loc = self.function
+        multi = self.multiple_allowed
+        return f'Dropdown Field: function = {func}, location = {loc}, multiple options allowed = {multi}'
+
+
 class Field(Model):
     """
     Model for the fields required in the query
     """
     limit = models.Q(app_label='new_pseudoc', model='textfield') | \
-        models.Q(app_label='new_pseudoc', model='numericfield')
+            models.Q(app_label='new_pseudoc', model='numericfield') | \
+            models.Q(app_label='new_pseudoc', model='dropdownfield')
 
     name = models.CharField(
         max_length=63,
