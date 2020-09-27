@@ -5,3 +5,5 @@ from new_pseudoc.models.fields import (
 )
 
 from new_pseudoc.models.apps import App
+
+from new_pseudoc.models.query import Query

@@ -37,7 +37,8 @@ class Field(Model):
     """
     Model for the fields required in the query
     """
-    limit = models.Q(app_label='new_pseudoc', model='textfield') | models.Q(app_label='new_pseudoc', model='numericfield')
+    limit = models.Q(app_label='new_pseudoc', model='textfield') | \
+        models.Q(app_label='new_pseudoc', model='numericfield')
 
     name = models.CharField(
         max_length=63,
