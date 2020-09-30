@@ -17,7 +17,10 @@ class Query(Model):
         max_length=127,
         blank=True,
     )
-    fields = models.ManyToManyField(Field)
+    fields = models.ManyToManyField(
+        to=Field,
+        related_name='field_query',
+    )
     app = models.ForeignKey(
         to=App,
         on_delete=models.CASCADE,
@@ -32,4 +35,6 @@ class Query(Model):
         """
 
         label = self.label
-        return f'{label}'
+        app = self.app
+
+        return f'app: {app.name}, query: {label}'

@@ -1,7 +1,6 @@
 from django.contrib.admin.sites import AlreadyRegistered
 
 from omniport.admin.site import omnipotence
-
 from new_pseudoc.models import (
     App,
     Field,
