@@ -18,7 +18,7 @@ class Query(Model):
         blank=True,
         null=True,
     )
-    fields = models.ManyToManyField(
+    field_list = models.ManyToManyField(
         to=Field,
         related_name='field_query',
         blank=True,
