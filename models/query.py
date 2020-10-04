@@ -16,10 +16,12 @@ class Query(Model):
     short_description = models.CharField(
         max_length=127,
         blank=True,
+        null=True,
     )
     fields = models.ManyToManyField(
         to=Field,
         related_name='field_query',
+        blank=True,
     )
     app = models.ForeignKey(
         to=App,

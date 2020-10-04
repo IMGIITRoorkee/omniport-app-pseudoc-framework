@@ -6,6 +6,7 @@ from formula_one.models.base import Model
 
 
 class TextField(Model):
+    type = 'text'
     max_length = models.IntegerField(blank=True, default=255)
 
     def __str__(self):
@@ -19,8 +20,9 @@ class TextField(Model):
 
 
 class NumericField(Model):
-    min = models.IntegerField()
-    max = models.IntegerField()
+    type = 'numeric'
+    min = models.IntegerField(blank=True, null=True)
+    max = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         """
@@ -34,6 +36,7 @@ class NumericField(Model):
 
 
 class DropdownField(Model):
+    type = 'dropdown'
     function = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     multiple_selection_allowed = models.BooleanField(default=True)
@@ -68,7 +71,8 @@ class Field(Model):
         unique=True
     )
     description = models.CharField(
-        max_length=255
+        max_length=255,
+        blank=True,
     )
     required = models.BooleanField(default=True)
 
@@ -91,6 +95,14 @@ class Field(Model):
         """
 
         field_name = self.display_name
-        query = self.field_query.first()
-        app = query.app
-        return f'App: {app.name}, Query: {query.label}, Field: {field_name}'
+        queries = self.field_query.all()
+        if queries.exists():
+            query = queries.first()
+            app = query.app
+            return f'App: {app.name}, ' \
+                   f'Query: {query.label}, ' \
+                   f'Field: {field_name}'
+        else:
+            return f'App: , ' \
+                   f'Query: , ' \
+                   f'Field: {field_name}'
