@@ -16,6 +16,7 @@ class TextFieldSerializer(ModelSerializer):
         fields = [
             'pk',
             'max_length',
+            'type',
         ]
 
 
@@ -33,6 +34,7 @@ class NumericFieldSerializer(ModelSerializer):
             'pk',
             'min',
             'max',
+            'type',
         ]
 
 
@@ -59,7 +61,7 @@ class FieldListSerializer(ModelSerializer):
     """
     Serializer for obtaining the list of the of fields
     """
-    field_type = FieldTypeRelatedField(read_only=True, many=True)
+    field_type = FieldTypeRelatedField(read_only=True)
 
     class Meta:
         """
