@@ -2,9 +2,10 @@ from formula_one.serializers.base import ModelSerializer
 from new_pseudoc.models import Query
 
 
-class QueryDetailsSerializer(ModelSerializer):
+class QueryDetailSerializer(ModelSerializer):
     """
-    Serializer for obtaining the details of the query being used in apps in the Pseudoc App
+    Serializer for obtaining the details
+    of the query being used in apps in the Pseudoc App
     """
 
     class Meta:

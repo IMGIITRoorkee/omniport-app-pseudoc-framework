@@ -1,13 +1,14 @@
 from formula_one.serializers.base import ModelSerializer
-from new_pseudoc.serializers import QueryDetailSerializer
+from new_pseudoc.serializers.query import QueryDetailSerializer
 from new_pseudoc.models import App
 
 
 class AppDetailSerializer(ModelSerializer):
     """
-    Serializer for obtaining the details of the apps being used in the Pseudoc app
+    Serializer for obtaining the details
+    of the apps being used in the Pseudoc app
     """
-    query = QueryDetailSerializer(read_only=True, many=True)
+    queries = QueryDetailSerializer(read_only=True, many=True)
 
     class Meta:
         """
@@ -19,7 +20,7 @@ class AppDetailSerializer(ModelSerializer):
             'pk',
             'name',
             'short_description',
-            'query'
+            'queries'
         ]
         read_only = [
             'short_description'
