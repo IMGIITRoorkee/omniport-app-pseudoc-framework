@@ -27,6 +27,7 @@ class AppDetailSerializer(ModelSerializer):
             'short_description',
         ]
 
+
 class AppListSerializer(ModelSerializer):
     """
     Serializer for obtaining the list of apps being used in the Pseudoc app

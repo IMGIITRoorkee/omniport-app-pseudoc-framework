@@ -1,31 +1,66 @@
 from formula_one.serializers.base import ModelSerializer
-from new_pseudoc.models import Field
+from new_pseudoc.models.fields import Field, TextField, NumericField, DropdownField
+from rest_framework import serializers
 
 
-class FieldDetailSerializer(ModelSerializer):
+class TextFieldSerializer(ModelSerializer):
     """
-    Serializer for obtaining the details of the fields in a query
+    Serializer for TextField
     """
 
     class Meta:
         """
-        Meta Class for FieldDetailSerializer
+        Meta class for TextFieldSerializer
         """
-
-        model = Field
+        model = TextField
         fields = [
             'pk',
-            'name',
-            'display_name',
-            'description',
-            'required',
+            'max_length',
         ]
+
+
+class NumericFieldSerializer(ModelSerializer):
+    """
+    Serializer for NumericField
+    """
+
+    class Meta:
+        """
+        Meta class for NumericFieldSerializer
+        """
+        model = NumericField
+        fields = [
+            'pk',
+            'min',
+            'max',
+        ]
+
+
+class FieldTypeRelatedField(serializers.RelatedField):
+    """
+
+    """
+
+    def to_representation(self, value):
+        """
+        Serialize the fieldType instances using instances of the models
+        """
+        if isinstance(value, TextField):
+            serializer = TextFieldSerializer(value)
+        elif isinstance(value, NumericField):
+            serializer = NumericFieldSerializer(value)
+        else:
+            raise Exception('Unexpected Type of Field Provided.')
+
+        return serializer.data
 
 
 class FieldListSerializer(ModelSerializer):
     """
     Serializer for obtaining the list of the of fields
     """
+    field_type = FieldTypeRelatedField(read_only=True, many=True)
+
     class Meta:
         """
         Meta Class for FieldListSerializer
@@ -35,7 +70,9 @@ class FieldListSerializer(ModelSerializer):
             'pk',
             'name',
             'display_name',
-            'description'
+            'description',
+            'field_type',
+            'required',
         ]
         read_only = [
             'name',

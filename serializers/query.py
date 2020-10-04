@@ -8,12 +8,12 @@ class QueryDetailSerializer(ModelSerializer):
     Serializer for obtaining the details
     of the query being used in apps in the Pseudoc App
     """
+    field_list = FieldListSerializer(read_only=True, many=True)
 
     class Meta:
         """
         Meta Class for QueryDetailSerializer
         """
-        field_list = FieldListSerializer(read_only=True, many=True)
 
         model = Query
         fields = [
