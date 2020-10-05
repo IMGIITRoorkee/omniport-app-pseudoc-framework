@@ -48,7 +48,7 @@ class DropdownField(Model):
         """
 
         function = self.function
-        location = self.function
+        location = self.location
         multiple_selection_allowed = self.multiple_selection_allowed
         return f'Dropdown Field: function = {function}, location = {location},\
             multiple selection allowed = {multiple_selection_allowed} '
@@ -58,9 +58,9 @@ class Field(Model):
     """
     Model for the fields required in the query
     """
-    limit = models.Q(app_label='new_pseudoc', model='textfield') | \
-        models.Q(app_label='new_pseudoc', model='numericfield') | \
-        models.Q(app_label='new_pseudoc', model='dropdownfield')
+    limit = models.Q(app_label='pseudoc_framework', model='textfield') | \
+        models.Q(app_label='pseudoc_framework', model='numericfield') | \
+        models.Q(app_label='pseudoc_framework', model='dropdownfield')
 
     name = models.CharField(
         max_length=63,

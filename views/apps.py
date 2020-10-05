@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions
 
-from new_pseudoc.serializers.apps import (
+from pseudoc_framework.serializers.apps import (
     AppDetailSerializer,
     AppListSerializer,
 )
-from new_pseudoc.models import App
+from pseudoc_framework.models import App
 
 
 class AppViewSet(viewsets.ReadOnlyModelViewSet):

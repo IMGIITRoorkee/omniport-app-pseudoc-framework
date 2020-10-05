@@ -1,7 +1,7 @@
 from django.db import models
 
 from formula_one.models.base import Model
-from new_pseudoc.models import Field, App
+from pseudoc_framework.models import Field, App
 
 
 class Query(Model):

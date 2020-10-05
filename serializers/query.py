@@ -1,6 +1,6 @@
 from formula_one.serializers.base import ModelSerializer
-from new_pseudoc.models import Query
-from new_pseudoc.serializers.fields import FieldListSerializer
+from pseudoc_framework.models import Query
+from pseudoc_framework.serializers.fields import FieldListSerializer
 
 
 class QueryDetailSerializer(ModelSerializer):

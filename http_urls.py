@@ -1,11 +1,11 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from new_pseudoc.views.apps import AppViewSet
-from new_pseudoc.views.query import QueryDetailView
+from pseudoc_framework.views.apps import AppViewSet
+from pseudoc_framework.views.query import QueryDetailView
 
 
-app_name = 'new_pseudoc'
+app_name = 'pseudoc_framework'
 
 router = routers.SimpleRouter()
 

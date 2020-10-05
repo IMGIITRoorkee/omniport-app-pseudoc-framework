@@ -1,7 +1,7 @@
 from django.contrib.admin.sites import AlreadyRegistered
 
 from omniport.admin.site import omnipotence
-from new_pseudoc.models import (
+from pseudoc_framework.models import (
     App,
     Field,
     NumericField,

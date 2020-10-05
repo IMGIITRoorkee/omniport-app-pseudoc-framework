@@ -20,7 +20,7 @@ class HelloWorld(APIView):
         response_data = {
             'status': 'SUCCESS',
             'message': (
-                'You have successfully initiated new_pseudoc and taken the '
+                'You have successfully initiated pseudoc_framework and taken the '
                 'first step to building your Omniport app. Edit '
                 'views.hello_world and make this app do magical things. We '
                 'can\'t wait to see what you make.'

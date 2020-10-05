@@ -1,1 +1,1 @@
-from new_pseudoc.admin import admin
+from pseudoc_framework.admin import admin

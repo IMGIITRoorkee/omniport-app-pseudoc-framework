@@ -1,10 +1,10 @@
-from new_pseudoc.models.fields import (
+from pseudoc_framework.models.fields import (
     TextField,
     NumericField,
     Field,
     DropdownField,
 )
 
-from new_pseudoc.models.apps import App
+from pseudoc_framework.models.apps import App
 
-from new_pseudoc.models.query import Query
+from pseudoc_framework.models.query import Query

@@ -1,7 +1,7 @@
 import importlib
 
 from formula_one.serializers.base import ModelSerializer
-from new_pseudoc.models import (
+from pseudoc_framework.models import (
     Field,
     TextField,
     NumericField,
