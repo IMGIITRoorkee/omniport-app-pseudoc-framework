@@ -1,5 +1,12 @@
+import importlib
+
 from formula_one.serializers.base import ModelSerializer
-from new_pseudoc.models.fields import Field, TextField, NumericField, DropdownField
+from new_pseudoc.models import (
+    Field,
+    TextField,
+    NumericField,
+    DropdownField
+)
 from rest_framework import serializers
 
 
@@ -38,6 +45,29 @@ class NumericFieldSerializer(ModelSerializer):
         ]
 
 
+class DropdownFieldSerializer(ModelSerializer):
+    """
+    Serializer for dropdown field
+    """
+    choices = serializers.SerializerMethodField()
+
+    class Meta:
+        """
+            Meta class for DropdownFieldSerializer
+        """
+        model = DropdownField
+        fields = [
+            'type',
+            'multiple_selection_allowed',
+            'choices',
+        ]
+
+    def get_choices(self, obj):
+        module = importlib.import_module(obj.location)
+        function = getattr(module, obj.function)
+        return function()
+
+
 class FieldTypeRelatedField(serializers.RelatedField):
     """
 
@@ -51,6 +81,8 @@ class FieldTypeRelatedField(serializers.RelatedField):
             serializer = TextFieldSerializer(value)
         elif isinstance(value, NumericField):
             serializer = NumericFieldSerializer(value)
+        elif isinstance(value, DropdownField):
+            serializer = DropdownFieldSerializer(value)
         else:
             raise Exception('Unexpected Type of Field Provided.')
 
