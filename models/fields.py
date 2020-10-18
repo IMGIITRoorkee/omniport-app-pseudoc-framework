@@ -83,7 +83,7 @@ class Field(Model):
         limit_choices_to=limit,
     )
     entity_object_id = models.PositiveIntegerField()
-    field_type = contenttypes_fields.GenericForeignKey(
+    field_attribute = contenttypes_fields.GenericForeignKey(
         ct_field='entity_content_type',
         fk_field='entity_object_id',
     )
