@@ -32,3 +32,9 @@ class HelloWorld(APIView):
             data=response_data,
             status=status.HTTP_200_OK
         )
+
+    def post(self, request, *args, **kwargs):
+        return Response(
+            data=request.data,
+            status=status.HTTP_200_OK
+        )
