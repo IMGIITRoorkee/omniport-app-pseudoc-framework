@@ -1,5 +1,6 @@
 from django.contrib.contenttypes import fields as contenttypes_fields
 from django.contrib.contenttypes import models as contenttypes_models
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from formula_one.models.base import Model
@@ -34,6 +35,21 @@ class NumericField(Model):
         maximum = self.max
         return f'Numeric Field: min = {minimum}, max = {maximum}'
 
+    def save(self):
+        """
+        Validation for the max and min values of the model in
+        the admin panel.
+        """
+        minimum = self.min
+        maximum = self.max
+        if maximum and minimum is not None:
+            if minimum > maximum:
+                raise ValidationError(
+                    'Maximum value can`t be greater than the minimum value.'
+                )
+        else:
+            super().save()
+
 
 class DropdownField(Model):
     type = 'dropdown'
@@ -59,8 +75,8 @@ class Field(Model):
     Model for the fields required in the query
     """
     limit = models.Q(app_label='pseudoc_framework', model='textfield') | \
-        models.Q(app_label='pseudoc_framework', model='numericfield') | \
-        models.Q(app_label='pseudoc_framework', model='dropdownfield')
+            models.Q(app_label='pseudoc_framework', model='numericfield') | \
+            models.Q(app_label='pseudoc_framework', model='dropdownfield')
 
     name = models.CharField(
         max_length=63,
