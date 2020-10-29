@@ -2,6 +2,7 @@ from django.contrib.contenttypes import fields as contenttypes_fields
 from django.contrib.contenttypes import models as contenttypes_models
 from django.core.exceptions import ValidationError
 from django.db import models
+import importlib
 
 from formula_one.models.base import Model
 
@@ -68,6 +69,17 @@ class DropdownField(Model):
         multiple_selection_allowed = self.multiple_selection_allowed
         return f'Dropdown Field: function = {function}, location = {location},\
             multiple selection allowed = {multiple_selection_allowed} '
+
+    def save(self):
+        """
+        Validation for dropdown function for the dropdown
+        field in the query.
+        """
+        function = self.function
+        location = self.location
+        module = importlib.import_module(location)
+        function = getattr(module, function)
+        super().save()
 
 
 class Field(Model):
