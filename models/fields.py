@@ -10,6 +10,7 @@ from formula_one.models.base import Model
 class TextField(Model):
     type = 'text'
     max_length = models.IntegerField(blank=True, default=255)
+    is_date = models.BooleanField(default=False)
 
     def __str__(self):
         """
@@ -18,7 +19,8 @@ class TextField(Model):
         """
 
         max_length = self.max_length
-        return f'Text Field: max length = {max_length}'
+        is_date = self.is_date
+        return f'Text Field: max length = {max_length}, is_date = {is_date}'
 
 
 class NumericField(Model):

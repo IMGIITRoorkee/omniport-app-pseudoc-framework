@@ -24,6 +24,7 @@ class TextFieldSerializer(ModelSerializer):
             'type',
             'pk',
             'max_length',
+            'is_date',
         ]
 
 
