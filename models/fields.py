@@ -50,6 +50,8 @@ class NumericField(Model):
                 raise ValidationError(
                     'Maximum value can`t be greater than the minimum value.'
                 )
+            else: 
+                super().save()
         else:
             super().save()
 
