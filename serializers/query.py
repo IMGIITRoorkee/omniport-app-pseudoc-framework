@@ -21,7 +21,6 @@ class QueryDetailSerializer(ModelSerializer):
             'short_description',
             'field_list',
             'app',
-            'api',
         ]
         read_only = [
             'short_description',

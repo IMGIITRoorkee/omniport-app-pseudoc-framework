@@ -28,7 +28,8 @@ class Query(Model):
         on_delete=models.CASCADE,
         related_name='queries',
     )
-    api = models.URLField()
+    query_function = models.CharField(max_length=255)
+    query_function_location = models.CharField(max_length=255)
 
     def __str__(self):
         """
