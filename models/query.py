@@ -1,4 +1,6 @@
+import importlib
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from formula_one.models.base import Model
 from pseudoc_framework.models import Field, App
@@ -28,8 +30,8 @@ class Query(Model):
         on_delete=models.CASCADE,
         related_name='queries',
     )
-    query_function = models.CharField(max_length=255)
     query_function_location = models.CharField(max_length=255)
+    query_function = models.CharField(max_length=255)
 
     def __str__(self):
         """
@@ -41,3 +43,16 @@ class Query(Model):
         app = self.app
 
         return f'app: {app.name}, query: {label}'
+
+    def clean(self):
+        """
+        Validation for query function to execute on query submission
+        """
+        try:
+            module = importlib.import_module(self.query_function_location)
+            getattr(module, self.query_function)
+            super().clean()
+        except ModuleNotFoundError:
+            raise ValidationError('Module not found')
+        except AttributeError:
+            raise ValidationError('Function not found')

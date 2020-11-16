@@ -38,22 +38,22 @@ class NumericField(Model):
         maximum = self.max
         return f'Numeric Field: min = {minimum}, max = {maximum}'
 
-    def save(self):
+    def clean(self):
         """
         Validation for the max and min values of the model in
-        the admin panel.
+        he admin panel.
         """
         minimum = self.min
         maximum = self.max
-        if maximum and minimum is not None:
+        if maximum is not None and minimum is not None:
             if minimum > maximum:
                 raise ValidationError(
                     'Maximum value can`t be greater than the minimum value.'
                 )
-            else: 
-                super().save()
+            else:
+                super().clean()
         else:
-            super().save()
+            super().clean()
 
 
 class DropdownField(Model):
@@ -74,16 +74,19 @@ class DropdownField(Model):
         return f'Dropdown Field: function = {function}, location = {location},\
             multiple selection allowed = {multiple_selection_allowed} '
 
-    def save(self):
+    def clean(self):
         """
         Validation for dropdown function for the dropdown
         field in the query.
         """
-        function = self.function
-        location = self.location
-        module = importlib.import_module(location)
-        function = getattr(module, function)
-        super().save()
+        try:
+            module = importlib.import_module(self.location)
+            getattr(module, self.function)
+            super().clean()
+        except ModuleNotFoundError:
+            raise ValidationError('Module not found')
+        except AttributeError:
+            raise ValidationError('Function not found')
 
 
 class Field(Model):
