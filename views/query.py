@@ -28,9 +28,24 @@ class ExecuteQueryView(views.APIView):
             query = Query.objects.get(pk=query_pk)
             module = importlib.import_module(query.query_function_location)
             function = getattr(module, query.query_function)
-            response_text = function(data=request.data)
-            return Response(data={'message': response_text},
-                            status=status.HTTP_200_OK)
+            response = function(data=request.data)
+            if isinstance(response, tuple):
+                response_data = response[0]
+                response_status = response[1]
+                if isinstance(response_data, str) and \
+                        isinstance(response_status, int):
+                    return Response(data=response_data, status=response_status)
+                else:
+                    return Response(data='Unable to resolve query response',
+                                    status=status.HTTP_501_NOT_IMPLEMENTED)
+            elif isinstance(response, str):
+                return Response(data=response, status=status.HTTP_200_OK)
+            else:
+                return Response(data='Unable to resolve query response',
+                                status=status.HTTP_501_NOT_IMPLEMENTED)
         except Query.DoesNotExist:
-            return Response(data={'message': 'Bad request'},
+            return Response(data='Bad request',
                             status=status.HTTP_400_BAD_REQUEST)
+        except IndexError:
+            return Response(data='Unable to resolve query response',
+                            status=status.HTTP_501_NOT_IMPLEMENTED)
