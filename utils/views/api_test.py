@@ -1,3 +1,6 @@
 def api_test(data):
-    print(data)
+    """
+    A test function which returns a success tuple
+    """
+
     return "Success", 200

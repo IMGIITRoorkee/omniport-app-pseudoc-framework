@@ -94,8 +94,8 @@ class Field(Model):
     Model for the fields required in the query
     """
     limit = models.Q(app_label='pseudoc_framework', model='textfield') | \
-            models.Q(app_label='pseudoc_framework', model='numericfield') | \
-            models.Q(app_label='pseudoc_framework', model='dropdownfield')
+        models.Q(app_label='pseudoc_framework', model='numericfield') | \
+        models.Q(app_label='pseudoc_framework', model='dropdownfield')
 
     name = models.CharField(
         max_length=63,

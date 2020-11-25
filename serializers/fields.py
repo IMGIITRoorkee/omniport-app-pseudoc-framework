@@ -54,7 +54,7 @@ class DropdownFieldSerializer(ModelSerializer):
 
     class Meta:
         """
-            Meta class for DropdownFieldSerializer
+        Meta class for DropdownFieldSerializer
         """
         model = DropdownField
         fields = [
@@ -64,6 +64,11 @@ class DropdownFieldSerializer(ModelSerializer):
         ]
 
     def get_choices(self, obj):
+        """
+        Return choices for dropdown field by executing a function
+        that returns a list of dictionary of format
+        List[{'displayName':<displayName>, 'value':<value>}]
+        """
         module = importlib.import_module(obj.location)
         function = getattr(module, obj.function)
         return function()

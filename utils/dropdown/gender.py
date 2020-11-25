@@ -1,11 +1,11 @@
 def get_gender():
     return [
         {
-            'name': 'Male',
+            'displayName': 'Male',
             'value': 'M'
         },
         {
-            'name': 'Female',
+            'displayName': 'Female',
             'value': 'F'
         }
     ]
