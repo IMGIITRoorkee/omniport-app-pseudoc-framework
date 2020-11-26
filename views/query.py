@@ -3,6 +3,8 @@ from rest_framework import views, generics, permissions
 from rest_framework.response import Response
 from rest_framework import status
 
+from kernel.permissions.helpcentre import HasHelpcentreRights
+
 from pseudoc_framework.serializers.query import QueryDetailSerializer
 from pseudoc_framework.models import Query
 
@@ -12,7 +14,7 @@ class QueryDetailView(generics.RetrieveAPIView):
     View for query details
     """
 
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticated & HasHelpcentreRights, ]
     serializer_class = QueryDetailSerializer
     queryset = Query.objects.all()
 
@@ -21,7 +23,7 @@ class ExecuteQueryView(views.APIView):
     """"
     View to handle queries
     """
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticated & HasHelpcentreRights, ]
 
     def post(self, request, query_pk, format=None):
         try:

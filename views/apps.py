@@ -1,5 +1,7 @@
 from rest_framework import viewsets, permissions
 
+from kernel.permissions.helpcentre import HasHelpcentreRights
+
 from pseudoc_framework.serializers.apps import (
     AppDetailSerializer,
     AppListSerializer,
@@ -12,7 +14,7 @@ class AppViewSet(viewsets.ReadOnlyModelViewSet):
     View to list available apps and services in pseudoc
     """
 
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticated & HasHelpcentreRights, ]
     serializer_class = AppDetailSerializer
     queryset = App.objects.all()
 
