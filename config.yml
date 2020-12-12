@@ -1,6 +1,6 @@
 nomenclature:
   name: pseudoc_framework
-  verboseName: Pseudoc
+  verboseName: Pseudoc Framework
 description: Solve Channel i queries
 baseUrls:
   http: pseudoc_framework/
