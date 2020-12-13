@@ -1,11 +1,9 @@
+from kernel.constants import biological_information
+
+
 def get_gender():
-    return [
-        {
-            'displayName': 'Male',
-            'value': 'M'
-        },
-        {
-            'displayName': 'Female',
-            'value': 'F'
-        }
+    genders = [
+        {'displayName': x[1], 'value': x[0]}
+        for x in biological_information.GENDERS
     ]
+    return genders

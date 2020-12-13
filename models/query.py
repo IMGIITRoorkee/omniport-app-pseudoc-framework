@@ -56,3 +56,6 @@ class Query(Model):
             raise ValidationError('Module not found')
         except AttributeError:
             raise ValidationError('Function not found')
+
+    class Meta:
+        verbose_name_plural = 'queries'
