@@ -1,8 +1,8 @@
 nomenclature:
-  name: new_pseudoc
-  verboseName: New pseudoc
-description: An app for Omniport that does what apps do
+  name: pseudoc_framework
+  verboseName: Pseudoc Framework
+description: Solve Channel i queries
 baseUrls:
-  http: new_pseudoc/
-  static: new_pseudoc/
+  http: pseudoc_framework/
+  static: pseudoc_framework/
 isApi: true
